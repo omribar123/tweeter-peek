@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Container } from '@material-ui/core';
+import { fetchAccount } from './state';
+import { AppHeader, Searchbar } from './components';
 import './App.css';
+import FollowersList from './components/FollowersList/FollowersList';
+import STATUS from './constants/status.const';
 
-function App() {
-  return (
+const App = ({ fetchAccountFlow, listState, followers }) => (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <AppHeader title="Twitter Peek" />
+        <Container maxWidth="xs">
+            <Searchbar onSearchClick={fetchAccountFlow} />
+            <FollowersList
+                state={listState}
+                followers={followers}
+            />
+        </Container>
     </div>
-  );
-}
+);
 
-export default App;
+App.propTypes = {
+    fetchAccountFlow: PropTypes.func,
+    listState: PropTypes.oneOf(Object.values(STATUS)),
+    followers: PropTypes.array
+};
+
+const mapStateToProps = ({ account, followers, listState }) => ({
+    account,
+    followers,
+    listState
+});
+
+const mapDispatchToProps = {
+    fetchAccountFlow: fetchAccount
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

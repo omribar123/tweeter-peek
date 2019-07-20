@@ -1,6 +1,8 @@
 import { TOGGLE_LIST_DISPLAY } from './actionTypes';
 
-export const toggleListDisplay = shouldShowMore => ({
-    action: TOGGLE_LIST_DISPLAY,
+const toggleListDisplay = shouldShowMore => ({
+    type: TOGGLE_LIST_DISPLAY,
     payload: { shouldShowMore }
 });
+
+export default toggleListDisplay;

@@ -1,6 +1,8 @@
 import { SORT_LIST } from './actionTypes';
 
-export const sortList = sortBy => ({
-    action: SORT_LIST,
+const sortList = sortBy => ({
+    type: SORT_LIST,
     payload: sortBy
 });
+
+export default sortList;
