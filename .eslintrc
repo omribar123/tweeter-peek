@@ -1,0 +1,46 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [],
+  "rules": {
+    "indent" : [ 2, 4, { "ignoredNodes": ["JSXElement"], "SwitchCase": 1 }],
+    "no-prototype-builtins" : 0,
+    "comma-dangle": ["error", "never"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-indent": [2, 4],
+    "react/jsx-indent-props": [2,4],
+    "import/no-extraneous-dependencies": 0,
+    "prefer-destructuring" : 0,
+    "import/prefer-default-export" : 0,
+    "import/no-named-as-default-member": 0,
+    "global-require" : 0,
+    "max-len": 0,
+    "no-throw-literal": 1,
+    "linebreak-style": 0,
+    "no-underscore-dangle": 0,
+    "dot-notation": 0,
+    "react/forbid-prop-types": 0,
+    "react/require-default-props": 0,
+    "react/no-unused-prop-types": 0,
+    "react/prefer-stateless-function": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/label-has-for": [ 2, {
+      "components": [ "Label" ],
+      "required": {
+        "some": [ "nesting", "id" ]
+      },
+      "allowChildren": true
+    }],
+    "class-methods-use-this": 0,
+    "no-param-reassign": 1,
+    "import/no-named-as-default": 0
+  }
+}
