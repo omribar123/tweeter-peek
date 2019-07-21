@@ -1,9 +1,38 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import { SegmentedControl } from 'segmented-control';
 import FollowersListItem from '../FollowersListItem/FollowersListItem';
 import { SORT_OPTIONS } from '../../constants';
+
+const styles = {
+    container: {
+        width: '100%'
+    },
+    sortPanel: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginTop: 10
+    },
+    sortLabel: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#657786'
+    },
+    sortButtons: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#1DA1F2',
+        borderRadius: 14
+    },
+    list: {
+        maxHeight: '70vh',
+        overflowY: 'scroll'
+    }
+};
 
 class FollowersList extends Component {
     onShowMore = () => {
@@ -13,16 +42,23 @@ class FollowersList extends Component {
     };
 
     render() {
-        const { followers, onSortList, hasMoreResults } = this.props;
+        const {
+            followers, onSortList, hasMoreResults, classes
+        } = this.props;
 
         return (
-            <div>
-                <SegmentedControl
-                    name="sortFollowersButton"
-                    options={SORT_OPTIONS}
-                    setValue={onSortList}
-                />
-                <List>
+            <div className={classes.container}>
+                <div className={classes.sortPanel}>
+                    <span className={classes.sortLabel}>SORT-BY</span>
+                    <SegmentedControl
+                        className={classes.sortButtons}
+                        name="sortFollowersButton"
+                        options={SORT_OPTIONS}
+                        setValue={onSortList}
+                        style={{ width: '40%', margin: '0 0 0 10px' }}
+                    />
+                </div>
+                <List className={classes.list}>
                     {followers.map(follower => <FollowersListItem key={follower.id} follower={follower} />)}
                 </List>
                 {hasMoreResults ? (
@@ -36,6 +72,7 @@ class FollowersList extends Component {
 }
 
 FollowersList.propTypes = {
+    classes: PropTypes.object,
     followers: PropTypes.array,
     onSortList: PropTypes.func,
     onFetchMoreClick: PropTypes.func,
@@ -48,4 +85,4 @@ FollowersList.defaultProps = {
     hasMoreResults: false
 };
 
-export default FollowersList;
+export default withStyles(styles)(FollowersList);

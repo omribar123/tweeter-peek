@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import NumberFormat from 'react-number-format';
 
 const styles = {
     container: {
-        display: 'block',
-        flexDirection: 'column'
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 5
     },
     item: {
         display: 'flex',
-        marginRight: 5
+        marginRight: 7
     },
     title: {
         color: '#657786',
         fontWeight: 'bold',
         fontSize: 12,
-        marginRight: 8
+        marginRight: 4
     },
     value: {
         color: '#1DA1F2',
@@ -30,10 +32,14 @@ const FollowerAttributes = ({ attributes, classes }) => (
         {attributes.map(({ title, value }) => (
             <div key={`${title}_${value}`} className={classes.item}>
                 <div className={classes.title}>
-                    {title}
+                    {`${title}:`}
                 </div>
                 <div className={classes.value}>
-                    {value}
+                    <NumberFormat
+                        value={value}
+                        displayType="text"
+                        thousandSeparator
+                    />
                 </div>
             </div>
         ))}
