@@ -1,6 +1,6 @@
 # Twitter-Peek
 
-This is a we application which displays list of a chosen Twitter account’s followers.
+Twitter-Peek is a web application which displays list of a chosen Twitter account’s followers.
 The app supports sorting of the current list by Account Name and by Screen Name.
 
 # Installation and Execution
