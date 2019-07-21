@@ -28,7 +28,7 @@ const styles = {
 const FollowerAttributes = ({ attributes, classes }) => (
     <div className={classes.container}>
         {attributes.map(({ title, value }) => (
-            <div className={classes.item}>
+            <div key={`${title}_${value}`} className={classes.item}>
                 <div className={classes.title}>
                     {title}
                 </div>

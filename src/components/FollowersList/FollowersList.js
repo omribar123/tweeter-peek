@@ -1,44 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { List, CircularProgress } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import STATUS from '../../constants/status.const';
-import FollowersListItem from '../FollowersListItem/FollowersListItem2';
+import { List, Button } from '@material-ui/core';
+import { SegmentedControl } from 'segmented-control';
+import FollowersListItem from '../FollowersListItem/FollowersListItem';
+import { SORT_OPTIONS } from '../../constants';
 
-const emptyListText = 'No results found, please try again...';
-const errorText = 'Something went wrong, please try again...';
-const styles = {
-    inactive: {
-        marginTop: '20%'
-    }
-};
+class FollowersList extends Component {
+    onShowMore = () => {
+        const { account, onFetchMoreClick } = this.props;
 
-const FollowersList = ({ followers, state, classes }) => {
-    switch (state) {
-        case STATUS.NOT_INITIALIZED:
-            return null;
-        case STATUS.ERROR:
-            return <div className={classes.inactive}>{errorText}</div>;
-        case STATUS.LOADING:
-            return <CircularProgress className={classes.inactive} />;
-        default:
-            return (
-                !followers.length ? <div className={classes.inactive}>{emptyListText}</div> : (
-                    <List>
-                        {followers.map(follower => <FollowersListItem follower={follower} />)}
-                    </List>
-                ));
+        onFetchMoreClick(account);
+    };
+
+    render() {
+        const { followers, onSortList, hasMoreResults } = this.props;
+
+        return (
+            <div>
+                <SegmentedControl
+                    name="sortFollowersButton"
+                    options={SORT_OPTIONS}
+                    setValue={onSortList}
+                />
+                <List>
+                    {followers.map(follower => <FollowersListItem key={follower.id} follower={follower} />)}
+                </List>
+                {hasMoreResults ? (
+                    <Button onClick={this.onShowMore}>
+                        SHOW MORE
+                    </Button>
+                ) : null}
+            </div>
+        );
     }
-};
+}
 
 FollowersList.propTypes = {
-    state: PropTypes.oneOf(Object.values(STATUS)),
     followers: PropTypes.array,
-    classes: PropTypes.object
+    onSortList: PropTypes.func,
+    onFetchMoreClick: PropTypes.func,
+    hasMoreResults: PropTypes.bool,
+    account: PropTypes.string
 };
 
 FollowersList.defaultProps = {
-    followers: []
+    onSortList: () => {},
+    hasMoreResults: false
 };
 
-export default withStyles(styles)(FollowersList);
+export default FollowersList;

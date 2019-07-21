@@ -5,7 +5,7 @@ import 'typeface-roboto';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { initStore } from './state'
+import { initStore } from './state';
 
 const store = initStore();
 
@@ -13,6 +13,7 @@ render(
     <Provider store={store}>
         <App />
     </Provider>,
-    document.getElementById('root'));
+    document.getElementById('root')
+);
 
 serviceWorker.unregister();

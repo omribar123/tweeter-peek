@@ -1,14 +1,11 @@
 import ajaxCaller from './ajaxCaller';
-import { token } from './auth/authManager';
 
-export const apiPrefix = 'https://api.twitter.com/1.1/';
-
-const buildOptions = options => ({
+const buildOptions = (token, options) => ({
     ...options,
-    Authorization: `Bearer ${token}`,
-    'content-type': 'application/json',
-    mode: 'cors',
-    credentials: 'include'
+    headers: {
+        Authorization: `Bearer ${token}`,
+        'content-type': 'application/json'
+    }
 });
 
-export const apiGet = (endpoint, options = {}) => ajaxCaller(endpoint, buildOptions(options));
+export const apiGet = (token, endpoint, options = {}) => ajaxCaller(endpoint, buildOptions(token, options));

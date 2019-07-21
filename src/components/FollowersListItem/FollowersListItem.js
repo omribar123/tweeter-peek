@@ -1,53 +1,49 @@
-/* eslint-disable camelcase */
-import React from 'react';
+/* eslint-disable camelcase,no-unused-vars */
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
-    Card, CardContent, CardHeader, Avatar
+    ListItem, ListItemAvatar, Avatar, ListItemText, Divider
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import FollowerAttributes from './FollowerAttributes';
 
 const styles = {
-    header: {
-        padding: 0
-    },
-    content: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: 0
-    },
-    countersContainer: {
-        display: 'flex',
-        alignContent: 'space-around'
-    }
+
 };
 
-const buildAttrsArray = (followers_count, friends_count, statuses_count, favorite_count) => ([
-    { title: 'Followers', value: followers_count },
-    { title: 'Following', value: friends_count },
-    { title: 'Tweets', value: statuses_count },
-    { title: 'Likes', value: favorite_count }
+const buildAttrsArray = (followers, following, tweets, likes) => ([
+    { title: 'Followers', value: followers },
+    { title: 'Following', value: following },
+    { title: 'Tweets', value: tweets },
+    { title: 'Likes', value: likes }
 ]);
 
-const FollowersListItem = ({ follower, classes }) => {
+const FollowersListItem = ({ follower }) => {
     const {
-        name, screen_name, description, followers_count,
-        friends_count, profile_image_url, statuses_count, favorite_count
+        name,
+        screenName,
+        description,
+        followersCount,
+        followingCount,
+        profileThumbnail,
+        tweetsCount,
+        likesCount
     } = follower;
+
     return (
-        <Card>
-            <CardHeader
-                className={classes.header}
-                avatar={<Avatar alt={name} src={profile_image_url} />}
-                title={name}
-                subheader={`@${screen_name}`}
-            />
-            <CardContent className={classes.content}>
-                <div>{description}</div>
-                <FollowerAttributes attributes={buildAttrsArray(followers_count, friends_count, statuses_count, favorite_count)} />
-            </CardContent>
-        </Card>
+        <Fragment>
+            <ListItem>
+                <ListItemAvatar>
+                    <Avatar alt={name} src={profileThumbnail} />
+                </ListItemAvatar>
+                <ListItemText
+                    primary={name}
+                    secondary={`@${screenName}${description ? ` - ${description}` : ''}`}
+                />
+                <FollowerAttributes attributes={buildAttrsArray(followersCount, followingCount, tweetsCount, likesCount)} />
+            </ListItem>
+            <Divider />
+        </Fragment>
     );
 };
 
