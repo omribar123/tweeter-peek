@@ -13,8 +13,9 @@ class Searchbar extends Component {
         const { onSearchClick } = this.props;
 
         e.preventDefault();
-        onSearchClick(term);
-        this.setState({ term: '' });
+        if (term && term.length) {
+            onSearchClick(term);
+        }
     };
 
     onInputChange = e => this.setState({ term: e.target.value });
@@ -46,7 +47,7 @@ Searchbar.propTypes = {
     onSearchClick: PropTypes.func
 };
 Searchbar.defaultProps = {
-    onSearchClick: (x) => { console.log(x); }
+    onSearchClick: () => { }
 };
 
 export default Searchbar;

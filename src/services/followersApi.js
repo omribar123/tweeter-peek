@@ -1,12 +1,15 @@
-import { apiGet, apiPrefix } from './apiCaller';
+import { apiPrefix } from './config';
+import { apiGet } from './apiCaller';
 
-const endpoint = 'followers/list.json';
+const endpoint = 'followers';
 
-const buildUrl = (account) => {
+const buildUrl = (account, cursor) => {
     const url = new URL(`${apiPrefix}${endpoint}`);
     url.searchParams.append('screen_name', account);
+    url.searchParams.append('cursor', cursor);
+    url.searchParams.append('count', '30');
     return url;
 };
 
-const getFollowers = account => apiGet(buildUrl(account));
+const getFollowers = (token, account, cursor) => apiGet(token, buildUrl(account, cursor));
 export default getFollowers;
