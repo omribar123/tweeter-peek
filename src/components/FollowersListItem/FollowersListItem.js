@@ -22,7 +22,6 @@ const FollowersListItem = ({ follower }) => {
     const {
         name,
         screenName,
-        description,
         followersCount,
         followingCount,
         profileThumbnail,
@@ -38,9 +37,13 @@ const FollowersListItem = ({ follower }) => {
                 </ListItemAvatar>
                 <ListItemText
                     primary={name}
-                    secondary={`@${screenName}${description ? ` - ${description}` : ''}`}
+                    secondary={(
+                        <Fragment>
+                            {`@${screenName}`}
+                            <FollowerAttributes attributes={buildAttrsArray(followersCount, followingCount, tweetsCount, likesCount)} />
+                        </Fragment>
+                    )}
                 />
-                <FollowerAttributes attributes={buildAttrsArray(followersCount, followingCount, tweetsCount, likesCount)} />
             </ListItem>
             <Divider />
         </Fragment>
