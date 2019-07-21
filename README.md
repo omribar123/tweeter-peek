@@ -12,7 +12,7 @@ The app supports sorting of the current list by Account Name and by Screen Name.
 4. run: npm start
 
 ## starting the app
-5. (from the project root folder)
+5. cd to project root folder
 6. run: npm install
 7. run: npm start
 
