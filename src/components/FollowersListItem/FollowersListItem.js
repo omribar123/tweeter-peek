@@ -1,15 +1,9 @@
-/* eslint-disable camelcase,no-unused-vars */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
     ListItem, ListItemAvatar, Avatar, ListItemText, Divider
 } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 import FollowerAttributes from './FollowerAttributes';
-
-const styles = {
-
-};
 
 const buildAttrsArray = (followers, following, tweets, likes) => ([
     { title: 'Followers', value: followers },
@@ -51,8 +45,7 @@ const FollowersListItem = ({ follower }) => {
 };
 
 FollowersListItem.propTypes = {
-    follower: PropTypes.object,
-    classes: PropTypes.object
+    follower: PropTypes.object
 };
 
-export default withStyles(styles)(FollowersListItem);
+export default FollowersListItem;
