@@ -1,7 +1,7 @@
 const request = require('request');
 
 const headers = {
-    Authorization: 'Basic N01WNXVUWEJ2djJBOVhEenRXZVdPWEkxYjppN2htSzRJZk5UNURIYjZSd2gyNE02N05yVmhpREI3d2NmT1RsaWpCSGtoaUpVYmVhcg==',
+    Authorization: AUTH,
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
 };
 const body = 'grant_type=client_credentials';
